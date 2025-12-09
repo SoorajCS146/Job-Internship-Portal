@@ -1,0 +1,106 @@
+############################
+# OS / IDE SPECIFIC
+############################
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS (if some teammates use mac)
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# VSCode (if someone uses it)
+.vscode/
+
+############################
+# MAVEN / JAVA BUILD OUTPUT
+############################
+
+# Maven target directories (ALL modules)
+target/
+**/target/
+
+# Logs
+*.log
+logs/
+*.out
+*.err
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Spring Boot devtools
+spring.devtools.restart.triggerfile
+
+############################
+# BUILD / TEMP / CACHE FILES
+############################
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Maven wrapper cache
+.mvn/wrapper/maven-wrapper.jar
+
+# Local build cache
+/.gradle/
+**/.gradle/
+
+# If you ever use Lombok
+lombok.config
+
+############################
+# DATABASE / DOCKER / OPS
+############################
+
+# PostgreSQL local data directories (if any)
+postgres-data/
+pgdata/
+
+# Docker
+docker-compose.override.yml
+*.pid
+
+############################
+# FRONTEND (if you add UI later)
+############################
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+
+############################
+# FILE UPLOADS / RESUMES (User-Service)
+############################
+
+# If you store uploaded files locally
+uploads/
+resumes/
+storage/
+
+############################
+# ENVIRONMENT VARIABLES
+############################
+
+# Secrets & env files
+.env
+.env.*
+*.env.local
