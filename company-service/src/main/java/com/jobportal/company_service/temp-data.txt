@@ -1,0 +1,35 @@
+{
+  "companyName": "Google",
+  "industry": "Technology",
+  "description": "Global technology company specializing in search, cloud computing, and AI.",
+  "website": "https://www.google.com",
+  "contactEmail": "careers@google.com",
+  "contactPhone": "+1-650-253-0000"
+}
+
+{
+  "companyName": "Zoho",
+  "industry": "Enterprise Software",
+  "description": "Indian SaaS company providing cloud-based business software solutions.",
+  "website": "https://www.zoho.com",
+  "contactEmail": "recruitment@zoho.com",
+  "contactPhone": "+91-44-6744-7000"
+}
+
+{
+  "companyName": "Stripe",
+  "industry": "FinTech",
+  "description": "Online payment processing platform for internet businesses.",
+  "website": "https://stripe.com",
+  "contactEmail": "jobs@stripe.com",
+  "contactPhone": "+1-415-805-4900"
+}
+
+{
+  "companyName": "Accenture",
+  "industry": "Consulting",
+  "description": "Global professional services company specializing in IT and management consulting.",
+  "website": "https://www.accenture.com",
+  "contactEmail": "careers.india@accenture.com",
+  "contactPhone": "+91-80-1234-5678"
+}

@@ -1,0 +1,41 @@
+Microservices High-level architecture :
+Eureka Server — service registry (single instance, run locally).
+
+* student-service — student profiles, resume upload (store path / S3 later), view jobs, apply (calls placement-service & company-service as needed).
+
+* company-service — company accounts, job postings, view applicants.
+
+* placement-service — placement department dashboards, approve job postings, review/shortlist applications, update application status.
+
+(optional later) API Gateway (Spring Cloud Gateway) + Config Server + Notification Service.
+
+-----------------------------------------------------------------------------------------------------
+
+Responsibility of company-service
+
+company-service should do ONLY this:
+* Manage company / recruiter profile
+* Create, update, fetch company details
+* No jobs yet (that belongs to job-service later)
+
+Example responsibilities:
+
+* Register company profile
+* Update company profile
+* Get company profile by ID
+* List all companies (admin/placement use)
+
+-----------------------------------------------------------------------------------------------------
+
+company-service
+Entities:
+* Company { id, name, email, password, contactPerson, verified(Boolean), createdAt }
+* Job { id, companyId, title, description, location, type, minYear, createdAt, isActive, approved(Boolean) }
+
+APIs:
+
+POST /companies — register
+POST /companies/login
+POST /companies/{companyId}/jobs — create job (initially isActive=false until placement approves)
+GET /companies/{companyId}/jobs
+GET /jobs/{jobId} — public job view
