@@ -3,6 +3,7 @@ package com.jobportal.company_service.controller;
 import com.jobportal.company_service.dto.CompanyRequestDto;
 import com.jobportal.company_service.dto.CompanyResponseDto;
 import com.jobportal.company_service.service.CompanyService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class CompanyController {
 //    }
 
     @PostMapping
-    public CompanyResponseDto create(@RequestBody CompanyRequestDto requestDto) {
+    public CompanyResponseDto create(@Valid @RequestBody CompanyRequestDto requestDto) {
         return companyService.createCompany(requestDto);
     }
 
@@ -33,5 +34,20 @@ public class CompanyController {
     @GetMapping
     public List<CompanyResponseDto> getAll() {
         return companyService.getAllCompanies();
+    }
+
+    @PutMapping("/{id}")
+    public CompanyResponseDto update( @PathVariable Long id, @RequestBody CompanyRequestDto requestDto) {
+        return companyService.updateCompany(id, requestDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        companyService.deleteCompanyById(id);
+    }
+
+    @DeleteMapping
+    public void delete() {
+        companyService.deleteAllCompanies();
     }
 }

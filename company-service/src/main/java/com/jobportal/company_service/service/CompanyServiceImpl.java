@@ -4,6 +4,7 @@ import com.jobportal.company_service.dto.CompanyRequestDto;
 import com.jobportal.company_service.dto.CompanyResponseDto;
 import com.jobportal.company_service.model.Company;
 import com.jobportal.company_service.repository.CompanyRepository;
+import com.jobportal.company_service.exception.CompanyNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,8 +36,8 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public CompanyResponseDto getCompanyById(Long id) {
         Company company = companyRepository.findById(id)
-                .orElse(null);
-//                .orElseThrow(() -> new RuntimeException("Company not found"));
+                .orElseThrow(() -> new CompanyNotFoundException(id));
+//                .orElse(null);
         if(company != null)
             return mapToResponse(company);
         return null;
@@ -48,6 +49,38 @@ public class CompanyServiceImpl implements CompanyService{
                 .stream()
                 .map(this::mapToResponse)
                 .toList();
+    }
+
+    @Override
+    public CompanyResponseDto updateCompany(Long id, CompanyRequestDto request) {
+        Company company = companyRepository.findById(id)
+                .orElse(null);
+//                .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
+        if(company == null)
+            return null;
+
+        company.setCompanyName(request.companyName);
+        company.setIndustry(request.industry);
+        company.setDescription(request.description);
+        company.setWebsite(request.website);
+        company.setContactEmail(request.contactEmail);
+        company.setContactPhone(request.contactPhone);
+
+        Company saved = companyRepository.save(company);
+        return mapToResponse(saved);
+    }
+
+    @Override
+    public void deleteCompanyById(Long id) {
+        if(!companyRepository.existsById(id)) {
+            throw new CompanyNotFoundException(id);
+        }
+        companyRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllCompanies() {
+        companyRepository.deleteAll();
     }
 
     private CompanyResponseDto mapToResponse(Company company) {
