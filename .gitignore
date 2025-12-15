@@ -64,6 +64,9 @@ spring.devtools.restart.triggerfile
 # If you ever use Lombok
 lombok.config
 
+
+data/
+*.mv.db
 ############################
 # DATABASE / DOCKER / OPS
 ############################
