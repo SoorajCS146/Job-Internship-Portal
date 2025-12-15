@@ -18,6 +18,7 @@ public class PlacementPosting {
     @Column(length = 2000)
     private String description;
 
+    @Column(nullable = false)
     private String companyName;
 
     @Enumerated(EnumType.STRING)

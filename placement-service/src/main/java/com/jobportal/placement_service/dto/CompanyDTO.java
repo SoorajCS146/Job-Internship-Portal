@@ -3,6 +3,11 @@ package com.jobportal.placement_service.dto;
 
 public class CompanyDTO {
     private Long id;
+    private String companyName;
+    private String industry;
+    private String description;
+    private String website;
+    private String contactEmail;
 
     public String getCompanyName() {
         return companyName;
@@ -51,10 +56,4 @@ public class CompanyDTO {
     public void setWebsite(String website) {
         this.website = website;
     }
-
-    private String companyName;
-    private String industry;
-    private String description;
-    private String website;
-    private String contactEmail;
 }

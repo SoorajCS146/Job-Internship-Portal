@@ -111,7 +111,7 @@ class FeignClientServiceTest {
         posting2.setId(2L);
 
         when(companyClient.getCompanyById(1L)).thenReturn(company);
-        when(repo.findByCompanyId(1L)).thenReturn(List.of(posting1, posting2));
+        when(repo.findByCompanyName("TechNova")).thenReturn(List.of(posting1, posting2));
 
         List<PlacementPosting> postings = service.getPostingsByCompany(1L);
         assertEquals(2, postings.size());

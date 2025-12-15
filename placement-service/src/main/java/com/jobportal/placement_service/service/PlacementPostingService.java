@@ -72,14 +72,14 @@ public class PlacementPostingService {
 
     // Company: Feign-Client call
     public List<PlacementPosting> getPostingsByCompany(Long companyId) {
-        CompanyDTO company = companyClient.getCompanyById(companyId);
+        CompanyDTO company;
+        company = companyClient.getCompanyById(companyId);
 
         if (company == null) {
             throw new RuntimeException("Company not found with ID: " + companyId);
         }
 
-        // Fetch postings using companyId
-        return repo.findByCompanyId(companyId);
+        return repo.findByCompanyName(company.getCompanyName());
     }
 }
 

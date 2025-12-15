@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PlacementPostingRepository extends JpaRepository<PlacementPosting, Long> {
-    List<PlacementPosting> findByCompanyId(Long companyId);
+    List<PlacementPosting> findByCompanyName(String companyName);
 }
