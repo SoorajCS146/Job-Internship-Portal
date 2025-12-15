@@ -93,6 +93,25 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$.length()").value(1));
     }
 
+    // UPDATE
+    @Test
+    void updateStudent_success() throws Exception {
+        Student updatedStudent = sampleStudent();
+        updatedStudent.setName("Updated Name");
+        updatedStudent.setCgpa(9.5);
+
+        Mockito.when(studentService.updateStudent(Mockito.eq(1L), Mockito.any(Student.class)))
+                .thenReturn(updatedStudent);
+
+        mockMvc.perform(put("/students/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedStudent)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("Updated Name"))
+                .andExpect(jsonPath("$.cgpa").value(9.5));
+    }
+
+
     // DELETE
     @Test
     void deleteStudent_success() throws Exception {

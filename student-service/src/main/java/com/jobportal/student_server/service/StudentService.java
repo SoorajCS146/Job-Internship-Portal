@@ -51,6 +51,8 @@ public class StudentService {
 
         return studentRepository.save(existing);
     }
+
+    // DELETE
     public void deleteStudent(Long id) {
         if (!studentRepository.existsById(id)) {
             throw new RuntimeException("Student not found");

@@ -1,0 +1,27 @@
+ {
+        "usn": "1MS23CS0abc",
+        "name": "Pinky Bond",
+        "email": "pinky.bond@example.com",
+        "branch": "Electronics",
+        "semester": 5,
+        "cgpa": 8.72,
+        "resumeUrl": "https://example.com/resumes/pinky.pdf"
+    },
+    {
+        "usn": "1MS23CS0def",
+        "name": "Tom Shetty",
+        "email": "tom.shetty@example.com",
+        "branch": "Computer Science",
+        "semester": 5,
+        "cgpa": 8.30,
+        "resumeUrl": "https://example.com/resumes/tom.pdf"
+    },
+    {
+        "usn": "1MS23CS0ghi",
+        "name": "John Kumar",
+        "email": "john.kumar@example.com",
+        "branch": "Computer Science",
+        "semester": 5,
+        "cgpa": 8.60,
+        "resumeUrl": "https://example.com/resumes/john.pdf"
+    }

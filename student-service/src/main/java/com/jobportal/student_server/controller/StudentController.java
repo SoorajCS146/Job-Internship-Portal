@@ -36,10 +36,16 @@ public class StudentController {
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
+
     // DELETE
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
     }
 
+    // UPDATE
+    @PutMapping("/{id}")
+    public Student updateStudent(@PathVariable Long id, @RequestBody Student updatedStudent) {
+        return studentService.updateStudent(id, updatedStudent);
+    }
 }
