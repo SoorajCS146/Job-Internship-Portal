@@ -1,0 +1,251 @@
+📘 FRONTEND INSTRUCTION FILE
+Job / Internship Portal – Microservices Demo Frontend
+
+1. Project Context
+
+This project is a backend-focused microservices demo implemented using Spring Boot.
+
+Backend Architecture
+* Services
+	- student-service → port 9001
+	- company-service → port 9002
+	- placement-service → port 9003
+
+* Infrastructure
+	eureka-server → port 8761
+	api-gateway (gateway-server) → port 9000
+
+* Service Discovery: Eureka is used by backend services
+* Database: H2 (file-based persistence)
+
+* API Access Rule: 
+	- Frontend must primarily communicate via API Gateway: http://localhost:9000
+	- Direct service access is allowed ONLY as a fallback (for demo resilience when gateway is unavailable)
+---
+2. Purpose of Frontend
+
+* This frontend is NOT production-grade
+* It exists only to demonstrate backend functionality
+* UI simplicity is preferred over visual polish
+* No frontend frameworks are allowed
+---
+
+3. Technology Constraints (MANDATORY)
+
+Use ONLY:
+* HTML
+* CSS
+* Vanilla JavaScript
+
+Do NOT use:
+* React / Angular / Vue
+* jQuery
+* Build tools or bundlers
+* Node.js backend
+---
+
+4. Frontend Folder Structure (MANDATORY)
+
+Create a new directory at the project root:
+
+job-internship-portal/
+  frontend/
+    index.html
+    config.js
+    apiClient.js
+
+    student-service/
+      student.html
+      student.css
+      student.js
+
+    company-service/
+      company.html
+      company.css
+      company.js
+
+    placement-service/
+      placement.html
+      placement.css
+      placement.js
+
+---
+
+5. API Endpoints
+
+Each service exposes REST APIs using standard CRUD patterns.
+
+Service Base Paths:
+| Service   | Base Path     |
+| --------- | ------------- |
+| Student   | `/students`   |
+| Company   | `/companies`  |
+| Placement | `/placements` |
+
+
+Expected Endpoints
+GET    /{service}
+GET    /{service}/{id}
+POST   /{service}
+PUT    /{service}/{id}
+DELETE /{service}/{id}
+
+Final decisions must be taken after analysing the backend-code.
+DTO structures should be inferred from backend responses.
+
+---
+
+6. API Gateway + Fallback Strategy (CRITICAL)
+
+* Primary Call Path: Frontend → API Gateway (9000) → Service
+
+* Fallback Call Path (DEMO ONLY): Frontend → Direct Service Port
+
+Direct Service URLs:
+| Service   | Fallback URL                                   |
+| --------- | ---------------------------------------------- |
+| Student   | [http://localhost:9001](http://localhost:9001) |
+| Company   | [http://localhost:9002](http://localhost:9002) |
+| Placement | [http://localhost:9003](http://localhost:9003) |
+
+---
+
+7. Global Configuration File (config.js)
+
+Create a centralized configuration file:
+
+frontend/config.js:
+const CONFIG = {
+  GATEWAY_BASE_URL: "http://localhost:9000",
+
+  SERVICES: {
+    student: {
+      path: "/students",
+      fallbackUrl: "http://localhost:9001"
+    },
+    company: {
+      path: "/companies",
+      fallbackUrl: "http://localhost:9002"
+    },
+    placement: {
+      path: "/placements",
+      fallbackUrl: "http://localhost:9003"
+    }
+  }
+};
+No URLs may be hardcoded elsewhere.
+
+---
+
+8. Shared API Client with Fallback (apiClient.js)
+
+All HTTP communication MUST go through a single helper.
+
+Responsibilities :
+	- Try API Gateway first
+
+	- If gateway fails:
+
+		- Retry using direct service URL
+
+		- Log warning to console
+
+	- Throw error only if BOTH attempts fail
+
+Required Function: async function apiFetch(serviceName, endpoint = "", options = {})
+
+Behavior:-
+	a) Construct Gateway URL
+	b) Call Gateway
+	c) If failed:
+		- Retry using fallback URL
+	d) Return parsed JSON response
+
+Service-specific JS files MUST NOT call fetch() directly.
+---
+
+9. Service-Specific JavaScript Rules
+
+Each service JS file must:
+
+	Import:	config.js, apiClient.js.
+	Use ONLY:
+		apiFetch("student")
+		apiFetch("company")
+		apiFetch("placement")
+
+	Never hardcode: Ports, Base URLs, Paths.
+
+---
+
+10. UI Requirements (Per Service)
+Each service page must include:
+-> Functional Elements
+	Form to create a new entity
+	Button to fetch all records
+	Optional:
+		Fetch by ID
+		Update by ID
+		Delete by ID
+-> Display:
+	Render results in HTML tables
+	Clear labels and headings
+	Success / error messages for user actions
+
+---
+
+11. index.html (Landing Page)
+
+Create a simple landing page:
+
+Required Links (wrapped in buttons):
+	- Student Service UI
+	- Company Service UI
+	- Placement Service UI
+
+This page acts as the demo entry point.
+
+---
+
+12. Error Handling Rules
+
+Gateway failure:
+	Log warning
+	Automatically trigger fallback
+
+Service failure:
+	Display user-friendly error message
+
+Network failure:
+	Display backend unavailable message
+
+---
+
+13. Demo Explanation Alignment (IMPORTANT)
+
+The frontend must support the following explanation: “The UI always communicates via the API Gateway. A fallback mechanism exists only for demo resilience if the gateway fails. In production, direct service access would be disabled.”
+
+---
+
+14. Code Quality Expectations
+
+Readable, commented code
+Simple functions
+No unnecessary abstractions
+Focus on clarity over optimization
+
+snake-case: html attibutes
+camelCase: JS-variables
+UPPERCASE: constants.
+
+---
+
+15. Summary
+
+This frontend:
+	- Is static.
+	- Demonstrates microservices + gateway architecture.
+	- Uses fallback only for demo robustness.
+	- Exists to support backend evaluation.
+
+Follow these instructions strictly.
