@@ -1,6 +1,8 @@
 package com.jobportal.placement_service.service;
 
+import com.jobportal.placement_service.client.CompanyClient;
 import com.jobportal.placement_service.client.StudentClient;
+import com.jobportal.placement_service.dto.CompanyDTO;
 import com.jobportal.placement_service.dto.StudentDTO;
 import com.jobportal.placement_service.model.PlacementPosting;
 import com.jobportal.placement_service.repository.PlacementPostingRepository;
@@ -12,10 +14,12 @@ public class PlacementPostingService {
 
     private final PlacementPostingRepository repo;
     private final StudentClient studentClient;
+    private final CompanyClient companyClient;
 
-    public PlacementPostingService(PlacementPostingRepository repo, StudentClient studentClient) {
+    public PlacementPostingService(PlacementPostingRepository repo, StudentClient studentClient, CompanyClient companyClient) {
         this.repo = repo;
         this.studentClient = studentClient;
+        this.companyClient = companyClient;
     }
 
     public PlacementPosting createPosting(PlacementPosting posting) {
@@ -46,6 +50,12 @@ public class PlacementPostingService {
 
         return repo.save(existing);
     }
+
+    public void deletePosting(Long id) {
+        repo.deleteById(id);
+    }
+
+    // Student: Feign-Client call
     public boolean isStudentEligible(String usn, Long postingId) {
         StudentDTO student = studentClient.getStudentByUsn(usn);
         PlacementPosting posting = getPosting(postingId);
@@ -60,8 +70,16 @@ public class PlacementPostingService {
         return true;
     }
 
+    // Company: Feign-Client call
+    public List<PlacementPosting> getPostingsByCompany(Long companyId) {
+        CompanyDTO company = companyClient.getCompanyById(companyId);
 
-    public void deletePosting(Long id) {
-        repo.deleteById(id);
+        if (company == null) {
+            throw new RuntimeException("Company not found with ID: " + companyId);
+        }
+
+        // Fetch postings using companyId
+        return repo.findByCompanyId(companyId);
     }
 }
+

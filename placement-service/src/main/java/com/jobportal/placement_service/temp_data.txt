@@ -1,0 +1,35 @@
+{
+  "title": "Software Engineer",
+  "description": "Looking for a Software Engineer with strong Java and Spring Boot skills.",
+  "companyName": "TechNova Solutions",
+  "jobType": "JOB",
+  "location": "Bangalore",
+  "ctc": 12.5,
+  "eligibleBranches": "CSE,ISE,AI",
+  "minimumCgpa": 7.5,
+  "applicationDeadline": "2025-01-15"
+}
+
+{
+  "title": "Backend Developer Intern",
+  "description": "6-month paid internship focusing on REST APIs and microservices.",
+  "companyName": "InnoSoft Labs",
+  "jobType": "INTERNSHIP",
+  "location": "Remote",
+  "ctc": null,
+  "eligibleBranches": "CSE,ISE",
+  "minimumCgpa": 7.0,
+  "applicationDeadline": "2024-12-31"
+}
+
+{
+  "title": "Data Engineer",
+  "description": "Hiring Data Engineers experienced with Python, SQL, and cloud platforms.",
+  "companyName": "CloudMatrix Inc",
+  "jobType": "JOB",
+  "location": "Hyderabad",
+  "ctc": 18.0,
+  "eligibleBranches": "CSE,DS,AI",
+  "minimumCgpa": 8.0,
+  "applicationDeadline": "2025-02-10"
+}
