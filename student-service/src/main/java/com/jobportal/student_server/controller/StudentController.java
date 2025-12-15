@@ -26,6 +26,11 @@ public class StudentController {
     public Student getStudent(@PathVariable Long id) {
         return studentService.getStudent(id);
     }
+    @GetMapping("/usn/{usn}")
+    public Student getByUsn(@PathVariable String usn) {
+        return studentService.getByUsn(usn);
+    }
+
     // READ all
     @GetMapping
     public List<Student> getAllStudents() {

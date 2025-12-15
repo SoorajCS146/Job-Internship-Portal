@@ -1,5 +1,7 @@
 package com.jobportal.placement_service.service;
 
+import com.jobportal.placement_service.client.StudentClient;
+import com.jobportal.placement_service.dto.StudentDTO;
 import com.jobportal.placement_service.model.PlacementPosting;
 import com.jobportal.placement_service.repository.PlacementPostingRepository;
 import org.springframework.stereotype.Service;
@@ -9,9 +11,11 @@ import java.util.List;
 public class PlacementPostingService {
 
     private final PlacementPostingRepository repo;
+    private final StudentClient studentClient;
 
-    public PlacementPostingService(PlacementPostingRepository repo) {
+    public PlacementPostingService(PlacementPostingRepository repo, StudentClient studentClient) {
         this.repo = repo;
+        this.studentClient = studentClient;
     }
 
     public PlacementPosting createPosting(PlacementPosting posting) {
@@ -42,6 +46,20 @@ public class PlacementPostingService {
 
         return repo.save(existing);
     }
+    public boolean isStudentEligible(String usn, Long postingId) {
+        StudentDTO student = studentClient.getStudentByUsn(usn);
+        PlacementPosting posting = getPosting(postingId);
+
+        // Check CGPA
+        if (student.getCgpa() < posting.getMinimumCgpa()) return false;
+
+        // Check branch
+        String branches = posting.getEligibleBranches(); // CSV string
+        if (!branches.contains(student.getBranch())) return false;
+
+        return true;
+    }
+
 
     public void deletePosting(Long id) {
         repo.deleteById(id);

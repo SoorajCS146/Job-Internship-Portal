@@ -28,9 +28,15 @@ public class StudentService {
                 .orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
+
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+    public Student getByUsn(String usn) {
+        return studentRepository.findByUsn(usn)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+    }
+
 
     // UPDATE
     public Student updateStudent(Long id, Student updatedStudent) {

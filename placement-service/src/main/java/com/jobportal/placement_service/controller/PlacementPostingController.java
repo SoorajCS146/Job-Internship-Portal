@@ -39,5 +39,11 @@ public class PlacementPostingController {
     public void delete(@PathVariable Long id) {
         service.deletePosting(id);
     }
+
+    @GetMapping("/check-eligibility/{usn}/{postingId}")
+    public boolean checkEligibility(@PathVariable String usn, @PathVariable Long postingId) {
+        return service.isStudentEligible(usn, postingId);
+    }
+
 }
 
