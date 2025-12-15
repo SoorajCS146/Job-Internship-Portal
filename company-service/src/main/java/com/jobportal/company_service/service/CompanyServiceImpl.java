@@ -5,6 +5,8 @@ import com.jobportal.company_service.dto.CompanyResponseDto;
 import com.jobportal.company_service.model.Company;
 import com.jobportal.company_service.repository.CompanyRepository;
 import com.jobportal.company_service.exception.CompanyNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,6 +45,15 @@ public class CompanyServiceImpl implements CompanyService{
         return null;
     }
 
+    /*
+    @Override
+    public Page<CompanyResponseDto> getAllCompanies(Pageable pageable) {
+        return companyRepository
+                .findAll(pageable).map(this :: mapToResponse);
+    }
+//    */
+
+//    /*
     @Override
     public List<CompanyResponseDto> getAllCompanies() {
         return companyRepository.findAll()
@@ -50,6 +61,7 @@ public class CompanyServiceImpl implements CompanyService{
                 .map(this::mapToResponse)
                 .toList();
     }
+//    */
 
     @Override
     public CompanyResponseDto updateCompany(Long id, CompanyRequestDto request) {

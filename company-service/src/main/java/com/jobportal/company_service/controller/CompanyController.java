@@ -4,6 +4,8 @@ import com.jobportal.company_service.dto.CompanyRequestDto;
 import com.jobportal.company_service.dto.CompanyResponseDto;
 import com.jobportal.company_service.service.CompanyService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,10 +33,20 @@ public class CompanyController {
         return companyService.getCompanyById(id);
     }
 
+
+    /*
+    @GetMapping
+    public Page<CompanyResponseDto> getAll(Pageable pageable) {
+        return companyService.getAllCompanies(pageable);
+    }
+    */
+
+//    /*
     @GetMapping
     public List<CompanyResponseDto> getAll() {
         return companyService.getAllCompanies();
     }
+//    */
 
     @PutMapping("/{id}")
     public CompanyResponseDto update( @PathVariable Long id, @RequestBody CompanyRequestDto requestDto) {
