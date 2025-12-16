@@ -4,29 +4,41 @@ async function apiFetch(serviceName, endpoint = "", options = {}) {
         throw new Error(`Service "${serviceName}" is not configured.`);
     }
 
-    const gatewayUrl = `${CONFIG.GATEWAY_BASE_URL}${service.path}${endpoint}`;
-    console.log("Gateway URL:", gatewayUrl)
+    const gatewayUrl = `${CONFIG.GATEWAY_BASE_URL}${service.serviceName}${service.serviceEndpoint}${endpoint}`;
+    console.log("Gateway URL:", gatewayUrl);
 
     try {
         const response = await fetch(gatewayUrl, options);
         if (!response.ok) {
-            throw new Error(`Gateway request failed with status ${response.status}`);
+            throw new Error(
+                `Gateway request failed with status ${response.status}`
+            );
         }
         return await response.json();
     } catch (error) {
-        console.warn(`Gateway request to ${gatewayUrl} failed. Trying fallback...`, error);
-        
-        const fallbackUrl = `${service.fallbackUrl}${service.path}${endpoint}`;
-        
+        console.warn(
+            `Gateway request to ${gatewayUrl} failed. Trying fallback...`,
+            error
+        );
+
+        const fallbackUrl = `${service.fallbackUrl}${service.serviceEndpoint}${endpoint}`;
+
         try {
             const fallbackResponse = await fetch(fallbackUrl, options);
             if (!fallbackResponse.ok) {
-                throw new Error(`Fallback request failed with status ${fallbackResponse.status}`);
+                throw new Error(
+                    `Fallback request failed with status ${fallbackResponse.status}`
+                );
             }
             return await fallbackResponse.json();
         } catch (fallbackError) {
-            console.error(`Fallback request to ${fallbackUrl} also failed.`, fallbackError);
-            throw new Error(`Both gateway and fallback requests failed for service "${serviceName}".`);
+            console.error(
+                `Fallback request to ${fallbackUrl} also failed.`,
+                fallbackError
+            );
+            throw new Error(
+                `Both gateway and fallback requests failed for service "${serviceName}".`
+            );
         }
     }
 }
