@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Service</title>
+    <link rel="stylesheet" href="company.css">
+</head>
+<body>
+    <h1>Company Service</h1>
+    <div id="message-container"></div>
+
+    <div class="form-container">
+        <h2>Create Company</h2>
+        <form id="create-company-form">
+            <input type="text" id="company-name" placeholder="Name" required>
+            <textarea id="company-description" placeholder="Description" required></textarea>
+            <input type="text" id="company-website" placeholder="Website">
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <div class="controls-container">
+        <button id="fetch-all-companies">Fetch All Companies</button>
+        <div class="fetch-by-id-container">
+            <input type="text" id="fetch-company-id" placeholder="Enter Company ID">
+            <button id="fetch-company-by-id">Fetch by ID</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <h2>Companies List</h2>
+        <table id="companies-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Website</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="../apiClient.js"></script>
+    <script src="company.js"></script>
+</body>
+</html>

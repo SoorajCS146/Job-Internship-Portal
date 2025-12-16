@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Service</title>
+    <link rel="stylesheet" href="placement.css">
+</head>
+<body>
+    <h1>Placement Service</h1>
+    <div id="message-container"></div>
+
+    <div class="form-container">
+        <h2>Create Placement</h2>
+        <form id="create-placement-form">
+            <input type="text" id="placement-title" placeholder="Title" required>
+            <textarea id="placement-description" placeholder="Description" required></textarea>
+            <input type="text" id="placement-company-id" placeholder="Company ID" required>
+            <select id="placement-job-type" required>
+                <option value="INTERNSHIP">Internship</option>
+                <option value="FULL_TIME">Full Time</option>
+            </select>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <div class="controls-container">
+        <button id="fetch-all-placements">Fetch All Placements</button>
+        <div class="fetch-by-id-container">
+            <input type="text" id="fetch-placement-id" placeholder="Enter Placement ID">
+            <button id="fetch-placement-by-id">Fetch by ID</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <h2>Placements List</h2>
+        <table id="placements-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Company ID</th>
+                    <th>Job Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="../config.js"></script>
+    <script src="../apiClient.js"></script>
+    <script src="placement.js"></script>
+</body>
+</html>
